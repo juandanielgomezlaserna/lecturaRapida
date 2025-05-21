@@ -17,7 +17,7 @@ body {
 section {
     background-color: #2962FF; /* azul moderno */
     color: white;
-    width: 400px;
+    width: 380px;
     height: 70vh;
     display: flex;
     flex-direction: column;
