@@ -8,6 +8,7 @@ section{
     align-items: start;
     justify-content: start;
     padding: 0;
+    height: 70vh;
 }
 
 .header{
@@ -21,11 +22,25 @@ section{
 
 .sections{
     display: flex;
-    justify-content: space-between;
     width: 100%;
+    border-bottom: 1px solid #2962FF;
+    border-right: 1px solid #2962FF;
+}
+
+.sections div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20%;
+    border-left: 1px solid #2962FF;
 }
 
 .sections a{
     text-decoration: none;
-
+    color: #2962FF;
+    width: 100%;
+    text-align: center;
+    &:hover{
+        background-color: #ddd;
+    }
 }
