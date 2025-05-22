@@ -1,0 +1,36 @@
+section {
+    background-color: #2962FF; /* azul moderno */
+}
+
+h2 {
+    font-size: 54px;
+    margin: 0;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+p {
+    font-size: 35px;
+    font-weight: bold;
+    margin: 0;
+    text-align: center;
+    line-height: 1.4;
+}
+
+a {
+    margin-top: auto;
+    margin-bottom: 40px;
+    padding: 20px 40px;
+    background-color: #000;
+    color: #D3D3D3;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 32px;
+}
+
+a:hover {
+    background-color: #0e2153;
+}
