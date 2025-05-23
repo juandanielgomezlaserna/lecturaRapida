@@ -6,6 +6,7 @@
     <title>Lectura rápida</title>
     <link rel="stylesheet" href="css/master.css">
     <link rel="stylesheet" href="css/section.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
  </head>
  <body>
     <section>
@@ -20,26 +21,145 @@
             <div class=""><a href="">EMD</a></div>
         </div>
         <div class="seleccionar">
-            <form action="">
-                <select name="categoria" id="categoria">
-                    <option value="">Categoría</option>
-                    <option value="EL1">EL1</option>
-                </select>
-                <select name="nivel" id="nivel">
-                    <option value="">Nivel</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                </select>
-            </form>
-            <button class="iniciar">Comenzar</button>
+            <select name="categoria" id="categoria">
+                <option value="">Categoría</option>
+                <option value="0">EL1</option>
+                <option value="1">EL2</option>
+                <option value="2">EL3</option>
+                <option value="3">EL4</option>
+                <option value="4">EL5</option>
+                <option value="5">EL6</option>
+                <option value="6">EL7</option>
+                <option value="7">EL8</option>
+            </select>
+            <select name="nivel" id="nivel">
+                <option value="">Nivel</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+            </select>
+            <button class="start">Comenzar</button>
+        </div>
+            <h2 class="instrucciones hidden"> <i class="fas fa-exclamation-circle"></i> </h2>
+        
+        <div class="pantalla1 hidden">
+            <h2 class="numero1"></h2>
+            <h2 class="numero2"></h2>
+        </div>
+        <div class="pantalla2 hidden">
+            <h2 class="letra1"></h2>
+            <h2 class="letra2"></h2>
         </div>
     </section>
+
+    <script>
+        //Elements
+
+        const header = document.querySelector(".header")
+        const btnStart = document.querySelector(".start")
+        const sections = document.querySelector(".sections")
+        const instrucciones = document.querySelector(".instrucciones")
+        const categoria = document.querySelector("#categoria")
+        const nivel = document.querySelector("#nivel")
+        const pantalla = document.querySelector(".pantalla")
+
+        // variables
+
+        let info = []
+
+        //Events
+
+        fetch('json/EL.json')
+        .then(response => response.json())
+        .then(data => {
+            info = data
+        }).catch(error=> console.error('Error: ', error))
+
+        btnStart.addEventListener("click", () => {
+            if (categoria.value != "" && nivel.value != "") {
+                header.classList.toggle("hidden")
+                sections.classList.toggle("hidden")
+                if (btnStart.textContent == "Comenzar") {
+                    btnStart.textContent = "Detener"
+                    instrucciones.innerHTML = '<i class="fas fa-exclamation-circle"></i>' + "<h2>" + info.instrucciones[categoria.value] + "</h2>"
+                    if (categoria.value == "0") {
+                        el1(true)
+                    }
+                    if (categoria.value == "1") {
+                        el2(true)
+                    }
+                }else{
+                    btnStart.textContent = "Comenzar"
+                    if (categoria.value == "0") {
+                        el1(false)
+                    }
+                    if (categoria.value == "1") {
+                        el2(false)
+                    }
+                }
+                instrucciones.classList.toggle("hidden")
+            }
+        })
+
+        // functions
+
+        function el1(encendido) {
+            const numeros = info.numeros;
+            const pantalla = document.querySelector(".pantalla1");
+            const num1 = document.querySelector(".pantalla1 .numero1");
+            const num2 = document.querySelector(".pantalla1 .numero2");
+            if (encendido) {
+                const tiempo = 1000 - ((parseInt(nivel.value) - 1) * 100);
+    
+                pantalla.classList.remove("hidden");
+    
+                let contador = 0;
+                const intervalo = setInterval(() => {
+                    btnStart.addEventListener("click", () => {
+                        clearInterval(intervalo)
+                    })
+                    num1.textContent = numeros[Math.floor(Math.random() * numeros.length)];
+                    num2.textContent = numeros[Math.floor(Math.random() * numeros.length)];
+                    contador++;
+                    if (contador >= 40) clearInterval(intervalo);
+                }, tiempo);
+            }else{
+                pantalla.classList.add("hidden")
+            }
+        }
+
+        function el2(encendido) {
+            const letras = info.letras;
+            const vocales = info.vocales;
+            const pantalla = document.querySelector(".pantalla2");
+            const letra1 = document.querySelector(".pantalla2 .letra1");
+            const letra2 = document.querySelector(".pantalla2 .letra2");
+            if (encendido) {
+                const tiempo = 1000 - ((parseInt(nivel.value) - 1) * 100);
+    
+                pantalla.classList.remove("hidden");
+    
+                let contador = 0;
+                const intervalo = setInterval(() => {
+                    btnStart.addEventListener("click", () => {
+                        clearInterval(intervalo)
+                    })
+                    letra1.textContent = letras[Math.floor(Math.random() * letras.length)];
+                    letra2.textContent = vocales[Math.floor(Math.random() * vocales.length)];
+                    contador++;
+                    if (contador >= 40) clearInterval(intervalo);
+                }, tiempo);
+            }else{
+                pantalla.classList.add("hidden")
+            }
+        }
+
+    </script>
  </body>
  </html>

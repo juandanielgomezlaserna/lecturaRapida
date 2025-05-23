@@ -1,0 +1,58 @@
+{
+    "instrucciones": [
+        "Leer el número formado, observando el centro de la panatalla",
+        "Leer la silaba formada, observando el centro de la panatalla",
+        "Como estás?"
+    ],
+    "textos": [
+
+    ],
+    "numeros": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+    ],
+    "letras": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J",
+        "K",
+        "L",
+        "M",
+        "N",
+        "Ñ",
+        "O",
+        "P",
+        "Q",
+        "R",
+        "S",
+        "T",
+        "U",
+        "V",
+        "W",
+        "X",
+        "Y",
+        "Z"
+],
+"vocales": [
+        "A",
+        "E",
+        "I",
+        "O",
+        "U"
+]
+}

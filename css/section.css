@@ -51,17 +51,10 @@ section{
 .seleccionar {
     margin-top: 20px;
     display: flex;
-    flex-direction: row;
+    justify-content: center;
     align-items: center;
     gap: 10px;
-}
-
-form {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 15px;
-    margin: 0;
+    width: 100%;
 }
 
 select {
@@ -72,7 +65,7 @@ select {
     color: #333;
 }
 
-.iniciar {
+.start {
     background-color: #2962FF;
     color: white;
     padding: 8px 10px;
@@ -80,4 +73,39 @@ select {
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
+}
+
+
+.instrucciones{
+    color: #ccc;
+}
+
+
+.instrucciones {
+    color: #fff;
+    align-items: center;
+    gap: 8px; 
+    display: flex;
+    background-color: #000000a4;
+    width: 100%;
+    h2{
+        font-weight: 400;
+        font-size: 15px;
+    }
+}
+
+/* PANTALLAS */
+
+.pantalla1, .pantalla2{
+    width: 100%;
+    display: flex;
+    h2{
+        width: 50%;
+        color: #000;
+        margin-left: 5px;
+    }
+}
+
+.hidden{
+    display: none;
 }
