@@ -46,8 +46,8 @@
             </select>
             <button class="start">Comenzar</button>
         </div>
-            <h2 class="instrucciones hidden"> <i class="fas fa-exclamation-circle"></i> </h2>
-        
+            <h2 class="instrucciones"> <i class="fas fa-exclamation-circle"></i> Instrucciones </h2>
+            <hr>
         <div class="pantalla1 hidden">
             <h2 class="numero1"></h2>
             <h2 class="numero2"></h2>
@@ -55,6 +55,14 @@
         <div class="pantalla2 hidden">
             <h2 class="letra1"></h2>
             <h2 class="letra2"></h2>
+        </div>
+        <div class="pantalla3 hidden">
+            <h2 class="palabra1"></h2>
+            <h2 class="palabra2"></h2>
+        </div>
+        <div class="pantalla4 hidden">
+            <h2 class="palabra1"></h2>
+            <h2 class="palabra2"></h2>
         </div>
     </section>
 
@@ -75,6 +83,10 @@
 
         //Events
 
+        categoria.addEventListener("change", () => {
+            instrucciones.innerHTML = '<i class="fas fa-exclamation-circle"></i>' + "<h2>" + info.instrucciones[categoria.value] + "</h2>"
+        })
+
         fetch('json/EL.json')
         .then(response => response.json())
         .then(data => {
@@ -87,12 +99,17 @@
                 sections.classList.toggle("hidden")
                 if (btnStart.textContent == "Comenzar") {
                     btnStart.textContent = "Detener"
-                    instrucciones.innerHTML = '<i class="fas fa-exclamation-circle"></i>' + "<h2>" + info.instrucciones[categoria.value] + "</h2>"
                     if (categoria.value == "0") {
                         el1(true)
                     }
                     if (categoria.value == "1") {
                         el2(true)
+                    }
+                    if (categoria.value == "2") {
+                        el3(true)
+                    }
+                    if (categoria.value == "3") {
+                        el4(true)
                     }
                 }else{
                     btnStart.textContent = "Comenzar"
@@ -102,8 +119,13 @@
                     if (categoria.value == "1") {
                         el2(false)
                     }
+                    if (categoria.value == "2") {
+                        el3(false)
+                    }
+                    if (categoria.value == "3") {
+                        el4(false)
+                    }
                 }
-                instrucciones.classList.toggle("hidden")
             }
         })
 
@@ -115,7 +137,7 @@
             const num1 = document.querySelector(".pantalla1 .numero1");
             const num2 = document.querySelector(".pantalla1 .numero2");
             if (encendido) {
-                const tiempo = 1000 - ((parseInt(nivel.value) - 1) * 100);
+                const tiempo = 600 - ((parseInt(nivel.value) - 1) * 50);
     
                 pantalla.classList.remove("hidden");
     
@@ -141,7 +163,7 @@
             const letra1 = document.querySelector(".pantalla2 .letra1");
             const letra2 = document.querySelector(".pantalla2 .letra2");
             if (encendido) {
-                const tiempo = 1000 - ((parseInt(nivel.value) - 1) * 100);
+                const tiempo = 600 - ((parseInt(nivel.value) - 1) * 50);
     
                 pantalla.classList.remove("hidden");
     
@@ -160,6 +182,99 @@
             }
         }
 
+        function el3(encendido) {
+            const textos = info.textos;
+            const texto = textos[Math.floor(Math.random() * textos.length)];
+            const palabras = texto.split(' '); // Dividimos el texto en palabras
+            const pantalla = document.querySelector(".pantalla3");
+            const palabra1 = document.querySelector(".pantalla3 .palabra1");
+            const palabra2 = document.querySelector(".pantalla3 .palabra2");
+    
+            if (encendido) {
+                const tiempo = 600 - ((parseInt(nivel.value) - 1) * 50);
+                pantalla.classList.remove("hidden");
+
+                let indice = 0;
+                const intervalo = setInterval(() => {
+                    // Si se hace click en btnStart, se detiene
+                    btnStart.addEventListener("click", () => {
+                        clearInterval(intervalo);
+                        // pantalla.classList.add("hidden");
+                    });
+
+                    // Mostramos dos palabras (si existen)
+                    if (indice < palabras.length) {
+                        palabra1.textContent = palabras[indice];
+                        indice++;
+                    } else {
+                        palabra1.textContent = '';
+                    }
+
+                    if (indice < palabras.length) {
+                        palabra2.textContent = palabras[indice];
+                        indice++;
+                    } else {
+                        palabra2.textContent = '';
+                    }
+
+                    // Si hemos llegado al final de las palabras, detenemos el intervalo
+                    if (indice >= palabras.length) {
+                        clearInterval(intervalo);
+                        // Opcional: ocultar la pantalla al terminar
+                        pantalla.classList.add("hidden");
+                    }
+                }, tiempo);
+            } else {
+                pantalla.classList.add("hidden");
+            }
+        }
+
+        function el4(encendido) {
+            const textos = info.textos;
+            const texto = textos[Math.floor(Math.random() * textos.length)];
+            const palabras = texto.split(' '); // Dividimos el texto en palabras
+            const pantalla = document.querySelector(".pantalla4");
+            const palabra1 = document.querySelector(".pantalla4 .palabra1");
+            const palabra2 = document.querySelector(".pantalla4 .palabra2");
+    
+            if (encendido) {
+                const tiempo = 600 - ((parseInt(nivel.value) - 1) * 50);
+                pantalla.classList.remove("hidden");
+
+                let indice = 0;
+                const intervalo = setInterval(() => {
+                    // Si se hace click en btnStart, se detiene
+                    btnStart.addEventListener("click", () => {
+                        clearInterval(intervalo);
+                        // pantalla.classList.add("hidden");
+                    });
+
+                    // Mostramos dos palabras (si existen)
+                    if (indice < palabras.length) {
+                        palabra1.textContent = palabras[indice];
+                        indice++;
+                    } else {
+                        palabra1.textContent = '';
+                    }
+
+                    if (indice < palabras.length) {
+                        palabra2.textContent = palabras[indice];
+                        indice++;
+                    } else {
+                        palabra2.textContent = '';
+                    }
+
+                    // Si hemos llegado al final de las palabras, detenemos el intervalo
+                    if (indice >= palabras.length) {
+                        clearInterval(intervalo);
+                        // Opcional: ocultar la pantalla al terminar
+                        pantalla.classList.add("hidden");
+                    }
+                }, tiempo);
+            } else {
+                pantalla.classList.add("hidden");
+            }
+        }
     </script>
  </body>
  </html>
